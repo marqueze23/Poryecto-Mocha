@@ -1,0 +1,19 @@
+{
+  "name": "proyectomocha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlosreyes2008/proyectomocha.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carlosreyes2008/proyectomocha/issues"
+  },
+  "homepage": "https://github.com/carlosreyes2008/proyectomocha#readme"
+}
