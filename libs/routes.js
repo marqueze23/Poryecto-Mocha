@@ -50,7 +50,13 @@ route('/productos', Productos.Update, 'PUT');
 route('/productos/:idSolicitante/:idProducto', Productos.Delete, 'DELETE');
 
 route('/movimientos/ajuste', Movimientos.Adjustment, 'POST');
+route('/movimientos/ajuste', Movimientos.AdjustmentReport, 'GET');
+route('/movimientos/ajuste/:idTienda', Movimientos.AdjustmentReportByStore, 'GET');
+
 route('/movimientos/traspaso' , Movimientos.Transfer, 'POST');
+route('/movimientos/traspaso' , Movimientos.TransferReport, 'GET');
+route('/movimientos/traspaso/:idTienda' , Movimientos.TransferReportByStore, 'GET');
+
 route('/movimientos/venta', Movimientos.Sale, 'POST');
 route('/movimientos/venta/:idVenta', Movimientos.SaleReport, 'GET');
 route('/movimientos/venta/tienda/:idTienda', Movimientos.SaleReporByStore, 'GET');

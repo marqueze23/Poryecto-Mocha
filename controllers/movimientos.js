@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const cUsuarios = require('./usuarios');
-const {Movimientos, Ventas} = require('../models');
+const {Movimientos, Ventas, Tiendas} = require('../models');
 
 exports.Adjustment = async function(req, res){
     const {datos} = req.body;
@@ -41,6 +41,60 @@ exports.Adjustment = async function(req, res){
     });
 }
 
+exports.AdjustmentReport = async function (req, res){
+    try{
+        var result = await Movimientos.findAll({
+            include: ['usuario','tienda','producto'],
+            where: {
+                motivo: "ajuste"
+            }
+        });
+    }catch(e){
+        res.status(400).json({
+            success: false,
+            message: 'Error al listar movimiento:ajuste',
+            error: {...e}
+        });
+        return;
+    }
+
+    res.json({
+        success: true,
+        ajustes: result
+    });
+}
+
+exports.AdjustmentReportByStore = async function (req, res){
+    const {idTienda} = req.params;
+
+    try{
+        var result = await Movimientos.findAll({
+            include: ['usuario','producto',{
+                model: Tiendas,
+                as: 'tienda',
+                where: {
+                    id: idTienda
+                }
+            }],
+            where: {
+                motivo: "ajuste"
+            }
+        });
+    }catch(e){
+        res.status(400).json({
+            success: false,
+            message: 'Error al listar movimiento:ajuste',
+            error: {...e}
+        });
+        return;
+    }
+
+    res.json({
+        success: true,
+        ajustes: result
+    });
+}
+
 exports.Transfer = async function(req, res){
     const {datos} = req.body;
 
@@ -67,7 +121,7 @@ exports.Transfer = async function(req, res){
 
         var recibe = await Movimientos.create({
             idUsuario: datos.idUsuario,
-            idTienda: datos.idTiendaEnvia,
+            idTienda: datos.idTiendaRecibe,
             idProducto: datos.idProducto,
             cantidad: datos.cantidad,
             tipo: 'entrada',
@@ -89,6 +143,60 @@ exports.Transfer = async function(req, res){
             envio: envia,
             recepcion: recibe
         }
+    });
+}
+
+exports.TransferReport = async function (req, res){
+    try{
+        var result = await Movimientos.findAll({
+            include: ['usuario','tienda','producto'],
+            where: {
+                motivo: "traspaso"
+            }
+        });
+    }catch(e){
+        res.status(400).json({
+            success: false,
+            message: 'Error al listar movimiento:traspaso',
+            error: {...e}
+        });
+        return;
+    }
+
+    res.json({
+        success: true,
+        trapasos: result
+    });
+}
+
+exports.TransferReportByStore = async function (req, res){
+    const {idTienda} = req.params;
+
+    try{
+        var result = await Movimientos.findAll({
+            include: ['usuario','producto',{
+                model: Tiendas,
+                as: 'tienda',
+                where: {
+                    id: idTienda
+                }
+            }],
+            where: {
+                motivo: "traspaso"
+            }
+        });
+    }catch(e){
+        res.status(400).json({
+            success: false,
+            message: 'Error al listar movimiento:traspaso',
+            error: {...e}
+        });
+        return;
+    }
+
+    res.json({
+        success: true,
+        trapasos: result
     });
 }
 
