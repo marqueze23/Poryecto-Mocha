@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "migrate": "sequelize db:migrate",
-    "unmigrate": "sequelize db:migrate:undo:all" ,
+    "unmigrate": "sequelize db:migrate:undo:all",
+    "seed": "sequelize db:seed:all",
+    "unseed": "sequelize db:seed:undo:all",
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,7 @@
   "dependencies": {
     "express": "^4.18.2",
     "mysql2": "^2.3.3",
+    "request": "^2.88.2",
     "sequelize": "^6.26.0",
     "sequelize-cli": "^6.5.2"
   },

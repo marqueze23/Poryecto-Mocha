@@ -2,6 +2,7 @@ const {Usuarios} = require('../models');
 
 exports.Create = async function(req, res){
     const {idSolicitante, usuario} = req.body;
+    
     try{
         var valid = await ValidRole(idSolicitante,'admin');
 
