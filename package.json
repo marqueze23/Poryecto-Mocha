@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "migrate": "sequelize db:migrate",
+    "unmigrate": "sequelize db:migrate:undo:all" ,
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +18,16 @@
   "bugs": {
     "url": "https://github.com/carlosreyes2008/proyectomocha/issues"
   },
-  "homepage": "https://github.com/carlosreyes2008/proyectomocha#readme"
+  "homepage": "https://github.com/carlosreyes2008/proyectomocha#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.26.0",
+    "sequelize-cli": "^6.5.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.1.0",
+    "nodemon": "^2.0.20"
+  }
 }
